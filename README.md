@@ -10,3 +10,9 @@ Con la siguiente distruccion de pines:**
 - Pin 1 - Pin 49
 - Pin 2 - Pin 51
 - Pin 3 - Pin 53
+
+## PIN DE ALARMA
+- Pin 5
+
+## PIN DE SERVOMOTOR
+- Pin 10

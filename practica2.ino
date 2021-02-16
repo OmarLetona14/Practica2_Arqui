@@ -5,8 +5,10 @@
 //Definiciones
 char entry[6] = {'2','0','2','1','1','1'};
 int key_counter = 0;
+int error_counter = 0;
 bool error = false;
-
+int alarm = 5;
+int startTime;
 // Se definen las filas y columnas del Keypad
 const byte ROWS = 4;
 const byte COLUMNS = 3;
@@ -29,36 +31,44 @@ void setup() {
   Serial1.begin(9600);
   pinMode(4, OUTPUT);
   pinMode(9,OUTPUT);
+  pinMode(alarm,OUTPUT);
 }
 
 void loop() {
+  
   if(key_counter<6){
     char key = keypad.getKey();
     if(key != NO_KEY){
       if(entry[key_counter]!=key){error=true;}
-      Serial1.println(key);  
+      Serial1.print(key);  
       key_counter++;
     } 
   }else{
     if(error){
-      digitalWrite(9, HIGH);  
-      key_counter = 0;
-      error=false;
+      if(error_counter<2){
+        digitalWrite(9, HIGH);  
+        key_counter = 0;
+        error=false;
+        error_counter++;
+        Serial1.println('\n');
+        delay(2000);
+        digitalWrite(9, LOW);
+        digitalWrite(4, LOW);
+      }else{
+        digitalWrite(alarm, (millis() / 100) % 2); 
+      }
     }else{
+      error_counter = 0;
       digitalWrite(4, HIGH);
+      Serial1.println('\n');
+      delay(2000);
+      digitalWrite(9, LOW);
+      digitalWrite(4, LOW);
     }
-    delay(2000);
-    digitalWrite(9, LOW);
-    digitalWrite(4, LOW);
   }
-  
 }
 
-int getFreeIndex(){
-  for(int i = 0; i<5; i++){
-    if(entry[i]== 'x'){
-      return i;  
-    }
-  }  
-  return 'n';
+
+void flash_leds(){
+  
 }
