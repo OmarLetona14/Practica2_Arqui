@@ -1,7 +1,7 @@
 # Practica 2 - Arqui 1
-**Esta practica esta construida con un Arduino Mega :happy: 
+Esta practica esta construida con un Arduino Mega
 ---
-Con la siguiente distribucion de pines:**
+Con la siguiente distribucion de pines:
 
 ## Keypad - Arduino
 - Pin A - Pin 23
