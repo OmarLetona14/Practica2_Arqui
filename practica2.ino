@@ -8,7 +8,22 @@ int key_counter = 0;
 int error_counter = 0;
 bool error = false;
 int alarm = 5;
-int startTime;
+bool rotated = false;
+
+/*ULTRASONICO*/
+int ultrasonic = 11;
+
+/*SERVOMOTOR*/
+//Pin del servomotor
+int servo = 10;
+
+//Posicion del servomotor
+int servoPosition = 0;
+
+//Instancia de la libreria 
+Servo servomotor;
+
+/*KEYPAD*/
 // Se definen las filas y columnas del Keypad
 const byte ROWS = 4;
 const byte COLUMNS = 3;
@@ -32,11 +47,23 @@ void setup() {
   pinMode(4, OUTPUT);
   pinMode(9,OUTPUT);
   pinMode(alarm,OUTPUT);
+  servomotor.attach(servo);
 }
 
 void loop() {
+  int distance;
+  distance = 0.01723 * readUltrasonicDistance(ultrasonic, ultrasonic);
+  if(distance>150){
+    ingresarPassword();
+  }else{
+    
+  }
   
-  if(key_counter<6){
+}
+
+
+void ingresarPassword(){
+   if(key_counter<6){
     char key = keypad.getKey();
     if(key != NO_KEY){
       if(entry[key_counter]!=key){error=true;}
@@ -58,17 +85,38 @@ void loop() {
         digitalWrite(alarm, (millis() / 100) % 2); 
       }
     }else{
+      if(!rotated){
+        girarServomotor();
+      }
       error_counter = 0;
-      digitalWrite(4, HIGH);
-      Serial1.println('\n');
-      delay(2000);
-      digitalWrite(9, LOW);
-      digitalWrite(4, LOW);
     }
   }
 }
 
+void girarServomotor(){
+  for(servoPosition = 0; servoPosition<90;servoPosition++){
+    servomotor.write(servoPosition);
+    delay(50);
+  }  
+  delay(1000);
+  for(servoPosition = 90; servoPosition>=0;servoPosition--){
+    servomotor.write(servoPosition);
+    delay(50);
+  }
+  delay(1000);
+  rotated = true;
+}
 
-void flash_leds(){
-  
+long readUltrasonicDistance(int triggerPin, int echoPin)
+{
+  pinMode(triggerPin, OUTPUT);  // Clear the trigger
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigger pin to HIGH state for 10 microseconds
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+  pinMode(echoPin, INPUT);
+  // Reads the echo pin, and returns the sound wave travel time in microseconds
+  return pulseIn(echoPin, HIGH);
 }

@@ -1,6 +1,5 @@
 # Practica 2 - Arqui 1
 Esta practica esta construida con un Arduino Mega
----
 Con la siguiente distribucion de pines:
 
 ## Keypad - Arduino
@@ -17,3 +16,6 @@ Con la siguiente distribucion de pines:
 
 ## PIN DE SERVOMOTOR
 - Pin 10
+
+## PIN DE ULTRASONICO 
+- Pin 11
