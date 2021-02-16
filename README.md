@@ -1,12 +1,8 @@
-# Header H1 
-**
-Practica 2 - Arqui 1
-Esta practica esta construida con un Arduino Mega
-Con la siguiente distruccion de pines:
-**
+# Practica 2 - Arqui 1
+**Esta practica esta construida con un Arduino Mega
+Con la siguiente distruccion de pines:**
 
-## Sub Topic Headings H2
-Keypad - Arduino
+## Keypad - Arduino
 - Pin A - Pin 23
 - Pin B - Pin 25
 - Pin C - Pin 27
