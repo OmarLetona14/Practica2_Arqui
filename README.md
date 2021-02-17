@@ -19,3 +19,11 @@ Con la siguiente distribucion de pines:
 
 ## PIN DE ULTRASONICO 
 - Pin 11
+
+## PINES DEL LCD 
+- Pin RS - Pin 13
+- Pin E - Pin 12
+- Pin D4 - Pin 39
+- Pin D5 - Pin 37
+- Pin D6 - Pin 35
+- Pin D7 - Pin 33
