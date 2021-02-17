@@ -52,8 +52,6 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 void setup() {
   Serial1.begin(9600);
-  pinMode(4, OUTPUT);
-  pinMode(9,OUTPUT);
   pinMode(alarm,OUTPUT);
   servomotor.attach(servo);
   lcd.begin(16,2);
@@ -96,7 +94,8 @@ void welcomeMessage(){
 void errorMessage(){
   lcd.print("ERROR EN"); 
   lcd.setCursor(0,1); 
-  lcd.print("CONTRASENIA");
+  lcd.print("CONTRASEA");
+  
   delay(3000);
   lcd.setCursor(0,0); 
 }
