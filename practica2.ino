@@ -59,17 +59,17 @@ void setup() {
   lcd.begin(16,2);
 }
 
-void loop() {
-  writeInitialMessage();
+void loop() {/*
+  lcd.clear();
   distance = 0.01723 * readUltrasonicDistance(ultrasonic, ultrasonic);
-  //Serial1.println(distance);
   if(distance<150){
+    passwordMessage();
     ingresarPassword();
-    }else{
-    
+  }else{
+   writeInitialMessage();
   }
-  delay(400);
-  
+  delay(400);*/
+  ingresarPassword();
 }
 
 void writeInitialMessage(){
@@ -85,6 +85,38 @@ void writeInitialMessage(){
   lcd.setCursor(0,0); 
 }
 
+void welcomeMessage(){
+  lcd.print("BIENVENIDO A");
+  lcd.setCursor(0,1);
+  lcd.print("CASA");
+  delay(3000);
+  lcd.setCursor(0,0); 
+}
+
+void errorMessage(){
+  lcd.print("ERROR EN"); 
+  lcd.setCursor(0,1); 
+  lcd.print("CONTRASENIA");
+  delay(3000);
+  lcd.setCursor(0,0); 
+}
+
+void alarmMessage(){
+  lcd.print("ACCESO NO");
+  lcd.setCursor(0,1); 
+  lcd.print("AUTORIZADO");
+  delay(3000);
+  lcd.setCursor(0,0);
+}
+
+void passwordMessage(){
+   lcd.print("INGRESE SU");
+   lcd.setCursor(0,1);
+   lcd.print("CONTRASENIA");
+   delay(3000);
+   lcd.setCursor(0,0); 
+}
+
 void ingresarPassword(){
    if(key_counter<6){
     char key = keypad.getKey();
@@ -96,23 +128,23 @@ void ingresarPassword(){
   }else{
     if(error){
       if(error_counter<2){
-        digitalWrite(9, HIGH);  
+        errorMessage();
         key_counter = 0;
         error=false;
         error_counter++;
-        Serial1.println('\n');
-        delay(2000);
-        digitalWrite(9, LOW);
-        digitalWrite(4, LOW);
       }else{
         digitalWrite(alarm, (millis() / 100) % 2); 
+        alarmMessage();
       }
     }else{
       if(!rotated){
+        welcomeMessage();
         girarServomotor();
       }
       error_counter = 0;
     }
+    Serial1.println("\n");
+    lcd.clear();
   }
 }
 
