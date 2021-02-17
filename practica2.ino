@@ -7,8 +7,10 @@ char entry[6] = {'2','0','2','1','1','1'};
 int key_counter = 0;
 int error_counter = 0;
 bool error = false;
-int alarm = 5;
 bool rotated = false;
+int distance;
+/*ALARMA*/
+int alarm = 5;
 
 /*ULTRASONICO*/
 int ultrasonic = 11;
@@ -42,25 +44,46 @@ byte columnPins[COLUMNS] = {49,51,53};
 //Teclado
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, columnPins, ROWS, COLUMNS);
 
+/*PANTALLA LCD*/
+const int rs = 13, en = 12, d4 = 39,
+d5 = 37, d6 = 35, d7 = 33;
+
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
 void setup() {
   Serial1.begin(9600);
   pinMode(4, OUTPUT);
   pinMode(9,OUTPUT);
   pinMode(alarm,OUTPUT);
   servomotor.attach(servo);
+  lcd.begin(16,2);
 }
 
 void loop() {
-  int distance;
+  writeInitialMessage();
   distance = 0.01723 * readUltrasonicDistance(ultrasonic, ultrasonic);
-  if(distance>150){
+  //Serial1.println(distance);
+  if(distance<150){
     ingresarPassword();
-  }else{
+    }else{
     
   }
+  delay(400);
   
 }
 
+void writeInitialMessage(){
+  lcd.print("CASA INTELIGENTE");
+  //setCursor(x, y);
+  lcd.setCursor(0,1);
+  lcd.print("ACE1"); 
+  delay(3000);
+  lcd.setCursor(0,0); 
+  lcd.clear();
+  lcd.print("ACE1-A-G11-S1");
+  delay(3000);
+  lcd.setCursor(0,0); 
+}
 
 void ingresarPassword(){
    if(key_counter<6){
