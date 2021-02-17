@@ -2,9 +2,9 @@
 Esta practica esta construida con un Arduino Mega
 Con la siguiente distribucion de pines:
 ## Librerias usadas
-Keypad - https://playground.arduino.cc/Code/Keypad/
-Servo - https://www.arduino.cc/reference/en/libraries/servo/
-LiquidCrystal - https://www.arduino.cc/en/Reference/LiquidCrystal
+- eypad - https://playground.arduino.cc/Code/Keypad/
+- Servo - https://www.arduino.cc/reference/en/libraries/servo/
+- LiquidCrystal - https://www.arduino.cc/en/Reference/LiquidCrystal
 
 ## Keypad - Arduino
 - Pin A - Pin 23
