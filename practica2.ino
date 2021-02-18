@@ -55,6 +55,10 @@ void setup() {
   pinMode(alarm,OUTPUT);
   servomotor.attach(servo);
   lcd.begin(16,2);
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
+  pinMode(A4, INPUT);
 }
 
 void loop() {/*
@@ -68,8 +72,73 @@ void loop() {/*
   }
   delay(400);*/
   ingresarPassword();
+  //habitaciones();
 }
+void habitaciones(){
+  int valHab1 = analogRead(A1);
+  int valHab2 = analogRead(A2);
+  int valHab3 = analogRead(A3);
+  int valHab4 = analogRead(A4);
+  int calHab1 = map(valHab1, 10, 975, 0, 100);
+  int calHab2 = map(valHab2, 10, 975, 0, 100);
+  int calHab3 = map(valHab3, 10, 975, 0, 100);
+  int calHab4 = map(valHab4, 10, 975, 0, 100);
+  if(calHab1>75){
+    lcd.clear();
+    lcd.print("Habitacion 1 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Encendida");
+    delay(3000);
+  }else{
+    lcd.clear();
+    lcd.print("Habitacion 1 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Apagada");
+    delay(3000);
+  }
+  if(calHab2>75){
+    lcd.clear();
+    lcd.print("Habitacion 2 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Encendida");
+    delay(3000);
+  }else{
+    lcd.clear();
+    lcd.print("Habitacion 2 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Apagada");
+    delay(3000);
+  }
+  if(calHab3>75){
+    lcd.clear();
+    lcd.print("Habitacion 3 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Encendida");
+    delay(3000);
+  }else{
+    lcd.clear();
+    lcd.print("Habitacion 3 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Apagada");
+    delay(3000);
+  }
+  if(calHab4>75){
+    lcd.clear();
+    lcd.print("Habitacion 4 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Encendida");
+    delay(3000);
+  }else{
+    lcd.clear();
+    lcd.print("Habitacion 4 luz:");
+    lcd.setCursor(0,2);
+    lcd.print("Apagada");
+    delay(3000);
+  }
 
+
+  
+}
 void writeInitialMessage(){
   lcd.print("CASA INTELIGENTE");
   //setCursor(x, y);
